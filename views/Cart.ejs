@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=pageTitle%></title>
+    <link rel="stylesheet" href="/css/Navbar.css" />
+    <link rel="stylesheet" href="/css/Cart.css" />
+  </head>
+  <body>
+    <%-include("./includes/Navbar.ejs",{loggedIn:loggedIn})%>
+
+    <section class="cart-section">
+      <div class="cart-wrapper">
+        <div class="cart-area">
+          <div class="bproduct-name">Product Name</div>
+          <div class="bproduct-quantity">Product Quantity</div>
+          <div class="bproduct-price">Product Price</div>
+          <div class="bproduct-price">Controls</div>
+        </div>
+        <% for(let product of products){ %>
+        <div class="cart-area">
+          <div class="bproduct-name exempt"><%=product.title%></div>
+          <div class="bproduct-quantity exempt"><%=product.quantity%></div>
+          <div class="bproduct-price exempt">$<%=product.price%></div>
+          <!-- <div class="bproduct-price">Controls</div> -->
+          <div class="bproduct-controls">
+            <a
+              href="/user/cart/add/<%=product._id%>/?status=cp"
+              class="ar-button"
+              >+</a
+            >
+            <a
+              href="/user/cart/remove/<%=product._id%>/?status=cp"
+              class="ar-button"
+              >-</a
+            >
+          </div>
+        </div>
+        <%}%>
+        <div>TOTAL: $<%=total%></div>
+      </div>
+    </section>
+  </body>
+</html>

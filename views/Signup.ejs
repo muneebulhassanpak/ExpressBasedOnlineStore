@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=pageTitle%></title>
+    <link rel="stylesheet" href="/css/Navbar.css" />
+    <link rel="stylesheet" href="/css/Add-Product.css" />
+  </head>
+  <body>
+    <%-include("./includes/Navbar.ejs",{loggedIn:loggedIn})%>
+
+    <section class="add-product-page">
+      <form
+        action="<%= status=='in' ? '/user/login' : (status=='up' ? '/user/signup/' : (status=='np'?'/user/password-reset/newpass' : '/user/password-reset')) %>"
+        method="POST"
+        class="form"
+      >
+        <% if(status=='preset') {%>
+        <h1 class="form-heading">Reset Password Form</h1>
+        <%}%> <% if(status=='in') { %>
+        <h1 class="form-heading">Login Form</h1>
+        <% } else if(status=='up'){%>
+        <h1 class="form-heading">Sign Up Form</h1>
+
+        <input
+          type="text"
+          name="fullname"
+          id="fullname"
+          placeholder="Your full name goes here"
+          class="field"
+          required
+        />
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="Your first name goes here"
+          class="field"
+          required
+        />
+        <%}%> <% if(status!='np'){ %>
+
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Email address..."
+          class="field"
+          required
+        />
+        <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+        <%}%> <%if(status!='preset'){%>
+        <input
+          type="password"
+          class="field"
+          name="password"
+          id="password"
+          required
+          placeholder="Please type a password"
+        />
+        <%}%> <%if(errorMessage){%>
+        <p class="error"><%=errorMessage%></p>
+        <%}%>
+        <div class="sign-up-form-controls form-controls">
+          <% if(status=='in') { %>
+          <input type="submit" value="Login" class="submit-btn" />
+          <div class="forgot-pass-div">
+            <a href="/user/password-reset/?status=preset" class=""
+              >Forgot Password ?</a
+            >
+          </div>
+          <%} else if(status=='up') {%>
+          <input type="submit" value="Signup" class="submit-btn" />
+          <%}%> <% if(status=='preset') {%>
+          <input type="submit" value="Reset" class="submit-btn" />
+          <%}%> <%if(status=='np'){%>
+          <input
+            type="submit"
+            value="Confirm New Password"
+            class="submit-btn"
+          />
+          <%}%>
+        </div>
+      </form>
+    </section>
+  </body>
+</html>

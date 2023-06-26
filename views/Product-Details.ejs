@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=pageTitle%></title>
+    <link rel="stylesheet" href="/css/Product-Details.css" />
+    <link rel="stylesheet" href="/css/Navbar.css" />
+  </head>
+  <body>
+    <%-include("./includes/Navbar.ejs",{loggedIn:loggedIn})%>
+
+    <section class="product-detail-section">
+      <div class="left">
+        <img
+          src="<%=product.imgUrl%>"
+          alt="Image goes here"
+          class="left-div-image"
+        />
+      </div>
+      <div class="right">
+        <h1 class="product-title"><%=product.title%></h1>
+        <p class="product-description"><%=product.description%></p>
+        <h3 class="product-price">
+          <span class="price-word">PRICE:</span> $<%=product.price%>
+        </h3>
+        <div class="details-page-controls">
+          <a href="" class="detail-btn">Add To Cart</a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

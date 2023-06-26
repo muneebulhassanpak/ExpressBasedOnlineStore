@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=pageTitle%></title>
+    <link rel="stylesheet" href="/css/Add-Product.css" />
+    <link rel="stylesheet" href="/css/Navbar.css" />
+  </head>
+  <body>
+    <%-include("./includes/Navbar.ejs",{loggedIn:loggedIn})%>
+    <section class="add-product-page">
+      <form
+        action="<%= !editing ? '/admin/add-product' : '/admin/edit-product/' + product._id %>"
+        method="POST"
+        class="form"
+      >
+        <h1 class="form-heading">New Product Information</h1>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          class="field"
+          placeholder="Product Name Goes here"
+          value="<%= editing ? product.title : '' %>"
+        />
+        <br />
+        <input
+          type="text"
+          name="description"
+          id="description"
+          class="field"
+          placeholder="Product Description Goes here"
+          value="<%= editing ? product.description : '' %>"
+        />
+        <br />
+        <input
+          type="number"
+          name="price"
+          id="price"
+          placeholder="Product Price Goes here"
+          class="field"
+          value="<%= editing ? product.price : '' %>"
+        />
+        <br />
+        <input
+          type="text"
+          name="imgUrl"
+          id="imgUrl"
+          placeholder="Product Image Url Goes here"
+          class="field"
+          value="<%= editing ? product.imgUrl : '' %>"
+        />
+        <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+        <br />
+        <div class="form-controls">
+          <input
+            type="submit"
+            value="<%= editing ? 'Update Product' : 'Add Product' %>"
+            class="submit-btn"
+          />
+        </div>
+      </form>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<header class="header">
+  <div class="wrapper">
+    <h1 class="logo">Logo</h1>
+    <nav class="navbar">
+      <ul class="navbar-list">
+        <li><a class="navbar-list_link" href="/">Shop</a></li>
+        <%if(loggedIn) {%>
+        <li class="parent">
+          <span class="navbar-list_link">Authority</span>
+          <ul class="sub-menu">
+            <li>
+              <a
+                class="navbar-list_link sub-menu-link"
+                href="/admin/add-product"
+                >Add Product</a
+              >
+            </li>
+            <li>
+              <a
+                class="navbar-list_link sub-menu-link"
+                href="/admin/edit-products"
+                >Edit/Delete Product</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li><a class="navbar-list_link" href="/user/cart">Cart</a></li>
+        <li><a class="navbar-list_link" href="/orders">Orders</a></li>
+        <%}%>
+        <li>
+          <a class="navbar-list_link" href="/user/signup/?status=up">SignUp</a>
+        </li>
+        <%if(!loggedIn){%>
+        <li>
+          <a class="navbar-list_link" href="/user/login/?status=in">Login</a>
+        </li>
+        <%} else {%>
+        <li>
+          <a class="navbar-list_link" href="/user/logout">Logout</a>
+        </li>
+        <%}%>
+      </ul>
+    </nav>
+  </div>
+</header>
